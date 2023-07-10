@@ -1,0 +1,6 @@
+#!/bin/bash
+
+. docker-app
+
+# shellcheck disable=SC2154
+$compose_exec exec -e XDEBUG_MODE=off app sh -c "composer ${*}"

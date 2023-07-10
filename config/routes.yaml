@@ -1,0 +1,5 @@
+controllers:
+  resource:
+    path: ../src/Application/Controller
+    namespace: LogAggregator\Controller
+  type: attribute
