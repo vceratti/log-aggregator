@@ -34,7 +34,6 @@ $rules = [
     'no_whitespace_in_blank_line' => true,
     'pow_to_exponentiation' => true,
     'protected_to_private' => true,
-    'single_blank_line_before_namespace' => true,
     'trim_array_spaces' => true,
     'phpdoc_trim_consecutive_blank_line_separation' => true,
     'phpdoc_trim' => true,

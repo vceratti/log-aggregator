@@ -14,6 +14,13 @@ WORKDIR /app
 
 FROM app-base as app-dev
 
+USER root
+
+COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+RUN install-php-extensions xdebug
+
+RUN mkdir -p /opt/phpstorm-coverage && chmod a+rw /opt/phpstorm-coverage
+
 ARG USER_ID
 ARG GROUP_ID
 
@@ -24,18 +31,7 @@ ENV COMPOSER_HOME=${HOME}/composer
 RUN addgroup -S $DEV_USER -g ${GROUP_ID} && adduser -S -D $DEV_USER -G $DEV_USER -u ${USER_ID}
 USER $DEV_USER
 RUN mkdir -p $COMPOSER_HOME
-#
-#
-#
-#WORKDIR /app
-#
-#FROM app-base as app-dev
-#
-#USER root
-#
-#COPY xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-#RUN install-php-extensions xdebug
-#
-#RUN mkdir -p /opt/phpstorm-coverage && chmod a+rw /opt/phpstorm-coverage
-#
-#USER $DEV_USER
+
+
+
+USER $DEV_USER
