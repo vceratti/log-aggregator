@@ -1,0 +1,64 @@
+{
+  "name": "vceratti/log-aggregator",
+  "description": "",
+  "keywords": [
+    "symfony",
+    "rest",
+    "router",
+    "psr7"
+  ],
+  "homepage": "https://github.com/vceratti/log-aggregator",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vinícius Ceratti",
+      "email": "v.ceratti@gmail.com",
+      "homepage": "https://www.linkedin.com/in/vceratti/"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "ext-json": "*",
+    "ext-pdo": "*"
+  },
+  "require-dev": {
+    "doctrine/sql-formatter": "^1.1",
+    "fakerphp/faker": "^1.23",
+    "friendsofphp/php-cs-fixer": "^3.17",
+    "guzzlehttp/guzzle": "^7.5",
+    "jangregor/phpstan-prophecy": "^1.0.0",
+    "phpmd/phpmd": "^2.13",
+    "phpstan/phpstan": "^1.10",
+    "phpunit/phpunit": "^10.2"
+  },
+  "config": {
+    "allow-plugins": {
+      "phpstan/extension-installer": true
+    },
+    "process-timeout": 0,
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+
+  "scripts": {
+    "post-autoload-dump": "@db:migrate",
+    "cs-fix": "XDEBUG_MODE=off php-cs-fixer fix -vvv",
+    "db:migrate": "app/bin/doctrine-migrations migrations:migrate --all-or-nothing -n",
+    "db:diff": "app/bin/doctrine-migrations migrations:diff --formatted --line-length 100  --check-database-platform --allow-empty-diff -n",
+    "db:reset": "app/bin/doctrine-migrations migrations:migrate 0 -n",
+    "phpstan": "XDEBUG_MODE=off phpstan analyse",
+    "phpmd": ["XDEBUG_MODE=off phpmd src text phpmd.xml"],
+    "pre-commit": ["@db:migrate", "@cs-fix", "@phpstan", "@phpmd", "@test:coverage"],
+    "test": "XDEBUG_MODE=off phpunit --no-coverage --testdox",
+    "test:coverage": "XDEBUG_MODE=coverage phpunit --testdox --coverage-html var/cache/coverage-report"
+  }
+}

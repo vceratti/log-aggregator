@@ -1,0 +1,13 @@
+#!/bin/bash
+
+test -f .env || cp .env.dist .env
+
+sed -i -E "s/(USER\_ID\=).*/\1$(id -u ${USER})/" .env
+sed -i -E "s/(GROUP\_ID\=).*/\1$(id -g ${USER})/" .env
+
+project_name=$(basename "$PWD")
+
+docker compose ps | grep "${project_name}_app_.+.*Up"  > /dev/null || \
+  docker compose down --remove-orphans && docker compose up -d --build --pull=always
+
+docker compose exec -e XDEBUG_MODE=off -u "$(id -u):$(id -g)" app sh -c "composer ${*}"
