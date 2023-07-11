@@ -5,3 +5,5 @@ parameters:
     - src
     - tests
   tmpDir: var/cache/phpstan
+  symfony:
+    containerXmlPath: var/cache/test/LogAggregator_Application_Symfony_KernelTestDebugContainer.xml

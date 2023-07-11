@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Application\Kernel;
 
-use Exception;
 use LogAggregator\Application\Symfony\Kernel;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -26,7 +25,7 @@ class KernelTest extends WebTestCase
         $this->client = self::createClient();
     }
 
-    /** @throws Exception */
+    /** @throws \Exception */
     #[DataProvider('invalidRequestProvider')]
     public function testHandleInvalidRequest(string $route, int $expectedResponseCode): void
     {

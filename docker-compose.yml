@@ -9,7 +9,7 @@ services:
             args:
                 USER_ID: ${USER_ID:-0}
                 GROUP_ID: ${GROUP_ID:-0}
-        command: php -S 0.0.0.0:80 -t /app
+        command: php -S 0.0.0.0:80 -t public
         env_file:
             - .env
         ports:
@@ -18,7 +18,7 @@ services:
             - ".:/app"
             - "./docker/volumes/composer-cache:/home/dev/composer"
     database:
-        image: mysql:8.0
+        image: mysql:${MYSQL_VERSION}
         ports:
             - "3386:3306"
         env_file:
