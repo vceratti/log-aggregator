@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Shared;
+namespace Tests\Assets\TestCase;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -68,8 +68,9 @@ class TestDatabase
 
         $this->console()->run(new StringInput('doctrine:migrations:migrate 0 --all-or-nothing -n'), new NullOutput());
         $this->console()->run(new StringInput('cache:clear'), new NullOutput());
+        usleep(10000);
         $this->console()->run(new StringInput('doctrine:migrations:migrate --all-or-nothing -n'), new NullOutput());
-
+        usleep(10000);
         $this->output->writeln('<fg=green>    Database ready!<fg=green></>');
     }
 

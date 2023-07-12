@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Shared;
+namespace Tests\Assets\TestCase;
 
 use Exception;
 use JsonSerializable;

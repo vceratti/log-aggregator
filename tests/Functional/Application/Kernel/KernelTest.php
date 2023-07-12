@@ -2,18 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Application\Kernel;
+namespace Tests\Functional\Application\Kernel;
 
 use LogAggregator\Application\Symfony\Kernel;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Group;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-#[Group('Functional')]
 #[CoversClass(Kernel::class)]
 class KernelTest extends WebTestCase
 {

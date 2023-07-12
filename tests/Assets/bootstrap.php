@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 use LogAggregator\Application\Symfony\Kernel;
-use Tests\Shared\TestDatabase;
+use Tests\Assets\TestCase\TestDatabase;
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+require_once dirname(__DIR__) . '/../vendor/autoload.php';
 
 $_ENV['KERNEL_CLASS'] = Kernel::class;
 

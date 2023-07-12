@@ -17,6 +17,8 @@ services:
         volumes:
             - ".:/app"
             - "./docker/volumes/composer-cache:/home/dev/composer"
+        depends_on:
+            -  database
     database:
         image: mysql:${MYSQL_VERSION}
         ports:

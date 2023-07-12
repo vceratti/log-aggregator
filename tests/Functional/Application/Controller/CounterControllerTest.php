@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Application\Controller;
+namespace Tests\Functional\Application\Controller;
 
 use LogAggregator\Application\Controller\CounterController;
 use LogAggregator\Domain\Counter;
 use PHPUnit\Framework\Attributes\CoversClass;
-use Tests\Shared\RequestTestCase;
+use Tests\Assets\TestCase\RequestTestCase;
 
 #[CoversClass(CounterController::class)]
 class CounterControllerTest extends RequestTestCase

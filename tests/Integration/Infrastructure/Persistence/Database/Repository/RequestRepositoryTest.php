@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Infrastructure\Persistence\Database\Repository;
+namespace Tests\Integration\Infrastructure\Persistence\Database\Repository;
 
 use DateTime;
 use Exception;
 use LogAggregator\Domain\RequestLog;
 use LogAggregator\Infrastructure\Persistence\Database\Repository\RequestLogRepository;
 use PHPUnit\Framework\Attributes\CoversClass;
-use Tests\Shared\ApplicationTestCase;
+use Tests\Assets\TestCase\ApplicationTestCase;
 
 #[CoversClass(RequestLogRepository::class)]
 class RequestRepositoryTest extends ApplicationTestCase

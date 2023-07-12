@@ -8,6 +8,6 @@ services:
   Symfony\Bundle\FrameworkBundle\Console\Application: ~
   Symfony\Component\Console\Output\ConsoleOutput: ~
   Symfony\Component\Console\Output\ConsoleOutputInterface: '@Symfony\Component\Console\Output\ConsoleOutput'
-  Tests\Shared\TestDatabase:
+  Tests\Assets\TestCase\TestDatabase:
     autowire: true
     public: true
