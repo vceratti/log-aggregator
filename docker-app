@@ -4,12 +4,9 @@ compose_exec=$(docker-compose version &> /dev/null && echo 'docker-compose' || e
 
 $compose_exec version &> /dev/null || echo 'docker compose not installed!'
 
-test -f .env || cp .env.dist .env
-
-sed -i -E "s/(USER\_ID\=).*/\1$(id -u "${USER}")/" .env
-sed -i -E "s/(GROUP\_ID\=).*/\1$(id -g "${USER}")/" .env
+test -f .env || sed -E "s/(USER.ID=.*)/\1$(id -u "${USER}")/;s/(GROUP.ID=.*)/\1$(id -g "${USER}")/" .env.dist > .env
 
 project_name=$(basename "$PWD")
 
-$compose_exec ps | grep "${project_name}.app.*Up" > /dev/null \
- || ($compose_exec down --remove-orphans && $compose_exec up -d --build --pull=always)
+$compose_exec ps | grep "${project_name}.app.*Up" > /dev/null || \
+ ($compose_exec down --remove-orphans && $compose_exec up -d --build --pull=always)

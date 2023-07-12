@@ -11,7 +11,7 @@
          failOnRisky="true"
          failOnSkipped="true"
          failOnEmptyTestSuite="true"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="tests/Assets/bootstrap.php"
          colors="true"
          requireCoverageMetadata="true"
          displayDetailsOnIncompleteTests="true"
@@ -22,23 +22,27 @@
          displayDetailsOnTestsThatTriggerErrors="true"
          cacheDirectory="var/cache/">
     <testsuites>
-        <testsuite name="Test Suite">
-            <directory>./tests/</directory>
+        <testsuite name="Functional">
+            <directory>./tests/Functional</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>./tests/Integration</directory>
+        </testsuite>
+        <testsuite name="Unit">
+            <directory>./tests/Unit</directory>
         </testsuite>
     </testsuites>
     <php>
-        <ini name="memory_limit" value="1G"/>
-        <env name="MYSQL_DATABASE" value="log_aggregator_test" force="true"/>
-
+        <ini name="memory_limit" value="2G"/>
         <!-- ###+ symfony/framework-bundle ### -->
         <env name="APP_SECRET" value="753739f7d8963e84708d1607679b03f6"/>
         <ini name="display_errors" value="1"/>
-        <ini name="error_reporting" value="-1"/>
+        <ini name="error_reporting" value="1"/>
+        <ini name="display_startup_errors" value="On" />
         <env name="APP_ENV" value="test" force="true"/>
         <server name="APP_ENV" value="test" force="true"/>
-        <server name="SHELL_VERBOSITY" value="-1"/>
-        <server name="SYMFONY_PHPUNIT_REMOVE" value=""/>
-        <server name="SYMFONY_PHPUNIT_VERSION" value="9.5"/>
+        <server name="SHELL_VERBOSITY" value="2"/>
+        <server name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
         <!-- ###- symfony/framework-bundle ### -->
     </php>
     <coverage pathCoverage="true"/>

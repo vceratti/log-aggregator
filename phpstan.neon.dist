@@ -1,7 +1,0 @@
-parameters:
-  level: 9
-  paths:
-    - public
-    - src
-    - tests
-  tmpDir: var/cache/phpstan

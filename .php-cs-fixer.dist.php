@@ -6,10 +6,11 @@ $excludedDirs = ['.github', '.idea', 'docker', 'var', 'vendor'];
 
 $finder = PhpCsFixer\Finder::create()->in(__DIR__)->exclude($excludedDirs);
 
-/** @see https://mlocati.github.io/php-cs-fixer-configurator/#version:3.13 for details/examples of configuration */
+/** @see https://mlocati.github.io/php-cs-fixer-configurator/#version:3.17 for details/examples of configuration */
 $rules = [
     '@PSR12' => true,
     'declare_strict_types' => true,
+    'fully_qualified_strict_types' => true,
     'array_syntax' => ['syntax' => 'short'],
     'blank_line_before_statement' => ['statements' => ['return']],
     'no_blank_lines_after_phpdoc' => true,
@@ -45,7 +46,10 @@ $rules = [
         'remove_inheritdoc' => true
     ],
     'phpdoc_single_line_var_spacing' => true,
-    'phpdoc_line_span' => ['const' => 'single' , 'property' => 'single', 'method' => 'single']
+    'phpdoc_line_span' => ['const' => 'single' , 'property' => 'single', 'method' => 'single'],
+    'php_unit_strict' => true,
+    'strict_comparison' => true,
+    'ordered_imports' => true
 ];
 
 return (new PhpCsFixer\Config())
