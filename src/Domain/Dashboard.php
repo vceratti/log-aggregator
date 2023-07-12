@@ -6,13 +6,18 @@ namespace LogAggregator\Domain;
 
 use JsonSerializable;
 
-class Counter implements JsonSerializable
+class Dashboard implements JsonSerializable
 {
     private int $count;
 
     public function __construct(int $count)
     {
         $this->count = $count;
+    }
+
+    public function getCount(): int
+    {
+        return $this->count;
     }
 
     /** @return array<string, mixed> */

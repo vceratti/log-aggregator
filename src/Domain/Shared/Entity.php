@@ -6,7 +6,7 @@ namespace LogAggregator\Domain\Shared;
 
 use Doctrine\ORM\Mapping as ORM;
 
-class Entity
+abstract class Entity
 {
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]

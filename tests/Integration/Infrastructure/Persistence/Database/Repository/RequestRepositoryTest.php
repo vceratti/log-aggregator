@@ -20,8 +20,7 @@ class RequestRepositoryTest extends ApplicationTestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->repository = self::getContainer()->get(RequestLogRepository::class);
+        $this->repository = self::getFromContainer(RequestLogRepository::class);
     }
 
     public function testSave(): void

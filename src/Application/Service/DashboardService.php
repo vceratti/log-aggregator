@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace LogAggregator\Application\Service;
 
 use LogAggregator\Application\DTO\CounterFilterDTO;
-use LogAggregator\Domain\Counter;
-use LogAggregator\Infrastructure\Persistence\CounterRepository;
+use LogAggregator\Domain\Dashboard;
+use LogAggregator\Infrastructure\Persistence\DashboardRepositoryInterface;
 
 class DashboardService
 {
-    private CounterRepository $counterRepository;
+    private DashboardRepositoryInterface $counterRepository;
 
-    public function __construct(CounterRepository $counterRepository)
+    public function __construct(DashboardRepositoryInterface $counterRepository)
     {
         $this->counterRepository = $counterRepository;
     }
 
-    public function count(CounterFilterDTO $counterFilterDTO): Counter
+    public function count(CounterFilterDTO $counterFilterDTO): Dashboard
     {
         return $this->counterRepository->countRequestLogs($counterFilterDTO);
     }

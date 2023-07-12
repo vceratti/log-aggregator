@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Functional\Application\Controller;
 
 use LogAggregator\Application\Controller\CounterController;
-use LogAggregator\Domain\Counter;
+use LogAggregator\Domain\Dashboard;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Assets\TestCase\RequestTestCase;
 
@@ -16,7 +16,7 @@ class CounterControllerTest extends RequestTestCase
     {
         $this->client->request('GET', '/count');
 
-        $expectedResult = new Counter(1);
+        $expectedResult = new Dashboard(0);
 
         $this->assertsSuccessfulResponse($expectedResult);
     }

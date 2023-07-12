@@ -80,21 +80,22 @@
     ],
     "post-autoload-dump": "",
     "cs-fix": "XDEBUG_MODE=off php-cs-fixer fix -vvv",
-    "db:migrate": ["@cache:clear","XDEBUG_MODE=off bin/console doctrine:migrations:migrate --all-or-nothing -n"],
+    "db:migrate": ["XDEBUG_MODE=off bin/console doctrine:migrations:migrate --all-or-nothing -n"],
     "db:diff": ["@auto-scripts", "XDEBUG_MODE=off bin/console doctrine:migrations:diff --formatted --line-length 100  --check-database-platform --allow-empty-diff -n"],
-    "db:reset": ["@auto-scripts", "XDEBUG_MODE=off bin/console doctrine:migrations:migrate 0 -n"],
+    "db:reset": ["[ $APP_ENV == 'dev' ] && XDEBUG_MODE=off bin/console doctrine:schema:drop --full-database --force"],
     "phpstan": "XDEBUG_MODE=off phpstan analyse",
     "phpmd": [
       "XDEBUG_MODE=off phpmd src text phpmd.xml"
     ],
     "pre-commit": [
+      "[ $APP_ENV == 'dev' ]",
       "@cs-fix",
       "@phpstan",
       "@phpmd",
       "@test:coverage"
     ],
-    "test": "XDEBUG_MODE=off phpunit --no-coverage --testdox",
-    "test:coverage": "XDEBUG_MODE=coverage phpunit --testdox --coverage-html var/cache/coverage-report"
+    "test": "[ $APP_ENV == 'dev' ] && XDEBUG_MODE=off phpunit --no-coverage --testdox",
+    "test:coverage": "[ $APP_ENV == 'dev' ] && XDEBUG_MODE=coverage phpunit --testdox --coverage-html var/cache/coverage-report"
   },
   "conflict": {
     "symfony/symfony": "*"

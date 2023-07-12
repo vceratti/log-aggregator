@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Tests\Assets\TestCase;
 
 use Doctrine\ORM\EntityManagerInterface;
+use LogAggregator\Domain\Shared\Entity;
 
 trait DatabaseTransactionTrait
 {
     protected function beingTransaction(): void
     {
-        $manager =  $this->getEntityManager();
-
+        $manager = $this->getEntityManager();
         $manager->beginTransaction();
     }
 
@@ -22,6 +22,7 @@ trait DatabaseTransactionTrait
 
         return $entityManager;
     }
+
     /**
      * @template T
      * @param class-string<T> $entityName
@@ -36,5 +37,19 @@ trait DatabaseTransactionTrait
     {
         $this->getEntityManager()->rollback();
         $this->getEntityManager()->close();
+    }
+
+    /** @param Entity|array<int, Entity> $entities */
+    protected function persistEntities(Entity|array $entities): void
+    {
+        if($entities instanceof Entity) {
+            $entities = [$entities];
+        }
+
+        foreach ($entities as $entity) {
+            $this->getEntityManager()->persist($entity);
+        }
+
+        $this->getEntityManager()->flush();
     }
 }

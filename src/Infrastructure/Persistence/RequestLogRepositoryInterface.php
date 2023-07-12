@@ -6,7 +6,7 @@ namespace LogAggregator\Infrastructure\Persistence;
 
 use LogAggregator\Domain\RequestLog;
 
-interface RequestLogRepository
+interface RequestLogRepositoryInterface
 {
     public function save(RequestLog $request): void;
 }

@@ -18,6 +18,7 @@ use Throwable;
 class TestDatabase
 {
     public const MAX_TRIES = 30;
+    public const DB_SLEEP_TIME_MS = 100;
     private Kernel $kernel;
     private EntityManagerInterface $entityManager;
     private OutputInterface $output;
@@ -33,7 +34,7 @@ class TestDatabase
     /** @throws Throwable */
     public function healthCheck(): void
     {
-        $this->output->writeln('    Connecting to database...');
+        $this->output->write('> Connecting to database... ');
         $this->waitForConnection();
     }
 
@@ -46,7 +47,7 @@ class TestDatabase
             return $this->entityManager->getConnection()->connect();
         } catch (Throwable $e) {
             if (str_contains($e->getMessage(), 'Connection refused')) {
-                sleep(1);
+                $this->sleepWait();
 
                 return self::waitForConnection($tries + 1);
             }
@@ -64,14 +65,13 @@ class TestDatabase
     /** @throws Exception */
     public function migrate(): void
     {
-        $this->output->writeln('    Running database migrations...');
 
-        $this->console()->run(new StringInput('doctrine:migrations:migrate 0 --all-or-nothing -n'), new NullOutput());
-        $this->console()->run(new StringInput('cache:clear'), new NullOutput());
-        usleep(10000);
+        $this->output->write('Resetting database... ');
+        $this->console()->run(new StringInput('doctrine:schema:drop --full-database --force'), new NullOutput());
+        $this->output->write('Running database migrations... ');
         $this->console()->run(new StringInput('doctrine:migrations:migrate --all-or-nothing -n'), new NullOutput());
-        usleep(10000);
-        $this->output->writeln('<fg=green>    Database ready!<fg=green></>');
+        $this->output->writeln('<fg=green> Database ready!<fg=green></>' . PHP_EOL);
+        $this->sleepWait();
     }
 
     public function console(): Application
@@ -81,6 +81,11 @@ class TestDatabase
         $console->setAutoExit(false);
 
         return $console;
+    }
+
+    private function sleepWait(): void
+    {
+        usleep(self::DB_SLEEP_TIME_MS * 1000);
     }
 
 }
