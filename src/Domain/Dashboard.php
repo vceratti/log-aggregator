@@ -8,23 +8,18 @@ use JsonSerializable;
 
 class Dashboard implements JsonSerializable
 {
-    private int $count;
+    private int $counter;
 
     public function __construct(int $count)
     {
-        $this->count = $count;
-    }
-
-    public function getCount(): int
-    {
-        return $this->count;
+        $this->counter = $count;
     }
 
     /** @return array<string, mixed> */
     public function jsonSerialize(): array
     {
         return [
-            'count' => $this->count
+            'counter' => $this->counter
         ];
     }
 }

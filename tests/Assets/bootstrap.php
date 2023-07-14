@@ -18,5 +18,7 @@ $kernel->boot();
 
 /** @var TestDatabase $testDatabase */
 $testDatabase = $kernel->getContainer()->get(TestDatabase::class);
+/** @noinspection PhpUnhandledExceptionInspection */
 $testDatabase->healthCheck();
+/** @noinspection PhpUnhandledExceptionInspection */
 $testDatabase->migrate();

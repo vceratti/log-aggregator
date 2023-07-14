@@ -6,7 +6,7 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
     /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/install-php-extensions && \
-  install-php-extensions pcntl mysqli pdo_mysql sockets
+  install-php-extensions pcntl mysqli pdo_mysql sockets bcmath
 
 COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 

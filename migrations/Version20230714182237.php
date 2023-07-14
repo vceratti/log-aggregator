@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230711085529 extends AbstractMigration
+final class Version20230714182237 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,6 +22,7 @@ final class Version20230711085529 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE request_log (
           id INT AUTO_INCREMENT NOT NULL,
+          service_name VARCHAR(255) NOT NULL,
           query VARCHAR(255) NOT NULL,
           status_code INT NOT NULL,
           date_time DATETIME NOT NULL,

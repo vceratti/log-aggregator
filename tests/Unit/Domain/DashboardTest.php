@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Dashboard::class)]
-class CounterTest extends TestCase
+class DashboardTest extends TestCase
 {
     public function testEntity(): void
     {
@@ -22,6 +22,6 @@ class CounterTest extends TestCase
     {
         $entity = new Dashboard(1);
 
-        $this->assertSame('{"count":1}', json_encode($entity));
+        $this->assertSame('{"counter":1}', json_encode($entity));
     }
 }

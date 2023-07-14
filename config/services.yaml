@@ -22,3 +22,6 @@ services:
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
+  League\OpenAPIValidation\PSR7\ValidatorBuilder: ~
+  Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory: ~
+  Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface: '@Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory'
