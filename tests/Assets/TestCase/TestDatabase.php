@@ -67,7 +67,7 @@ class TestDatabase
     {
 
         $this->output->write('Resetting database... ');
-        $this->console()->run(new StringInput('doctrine:schema:drop --full-database --force'), new NullOutput());
+        $this->console()->run(new StringInput('doctrine:Schema:drop --full-database --force'), new NullOutput());
         $this->output->write('Running database migrations... ');
         $this->console()->run(new StringInput('doctrine:migrations:migrate --all-or-nothing -n'), new NullOutput());
         $this->output->writeln('<fg=green> Database ready!<fg=green></>' . PHP_EOL);

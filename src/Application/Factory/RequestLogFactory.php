@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace LogAggregator\Application\Factory;
 
 use DateTime;
-use LogAggregator\Application\DTO\RequestLogDTO;
+use LogAggregator\Application\Message\Request\RequestLogRequest;
 use LogAggregator\Domain\RequestLog;
 
 class RequestLogFactory
 {
-    public function createEntity(RequestLogDTO $requestLogDTO): RequestLog
+    public function createEntity(RequestLogRequest $requestLogDTO): RequestLog
     {
-        $requestLogDTO->validate();
-
         return new RequestLog(
-            1,
+            '',
+            $requestLogDTO->getStatusCode(),
             'rs',
             new DateTime('now')
         );

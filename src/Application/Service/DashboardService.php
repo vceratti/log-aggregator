@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace LogAggregator\Application\Service;
 
-use LogAggregator\Application\DTO\CounterFilterDTO;
+use LogAggregator\Application\Message\Request\DashboardFilterRequest;
 use LogAggregator\Domain\Dashboard;
 use LogAggregator\Infrastructure\Persistence\DashboardRepositoryInterface;
 
 class DashboardService
 {
-    private DashboardRepositoryInterface $counterRepository;
+    private DashboardRepositoryInterface $dashboardRepository;
 
-    public function __construct(DashboardRepositoryInterface $counterRepository)
+    public function __construct(DashboardRepositoryInterface $dashboardRepository)
     {
-        $this->counterRepository = $counterRepository;
+        $this->dashboardRepository = $dashboardRepository;
     }
 
-    public function count(CounterFilterDTO $counterFilterDTO): Dashboard
+    public function count(DashboardFilterRequest $dashboardFilterDTO): Dashboard
     {
-        return $this->counterRepository->countRequestLogs($counterFilterDTO);
+        return $this->dashboardRepository->countRequestLogs($dashboardFilterDTO);
     }
 }

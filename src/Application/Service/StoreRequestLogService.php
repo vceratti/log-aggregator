@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace LogAggregator\Application\Service;
 
-use LogAggregator\Application\DTO\RequestLogDTO;
 use LogAggregator\Application\Factory\RequestLogFactory;
+use LogAggregator\Application\Message\Request\RequestLogRequest;
 use LogAggregator\Infrastructure\Persistence\Database\Repository\RequestLogRepository;
 
 class StoreRequestLogService
@@ -19,7 +19,7 @@ class StoreRequestLogService
         $this->entityFactory = $entityFactory;
     }
 
-    public function insert(RequestLogDTO $requestLogDTO): void
+    public function insert(RequestLogRequest $requestLogDTO): void
     {
         $requestLog = $this->entityFactory->createEntity($requestLogDTO);
         $this->requestLogRepository->save($requestLog);

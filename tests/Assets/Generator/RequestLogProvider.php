@@ -12,6 +12,6 @@ class RequestLogProvider extends EntityGenerator
 {
     public static function validEntity(): RequestLog
     {
-        return new RequestLog(1, '10', new DateTime('now'));
+        return new RequestLog('service', 1, 'query', new DateTime(''));
     }
 }

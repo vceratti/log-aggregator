@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LogAggregator\Application\DTO\Shared;
+namespace LogAggregator\Application\Message;
 
 use Exception;
 

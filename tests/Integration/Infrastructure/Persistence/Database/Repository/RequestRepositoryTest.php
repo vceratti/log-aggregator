@@ -25,7 +25,7 @@ class RequestRepositoryTest extends ApplicationTestCase
 
     public function testSave(): void
     {
-        $request = new RequestLog(1, 'test', new DateTime('now'));
+        $request = new RequestLog('service', 1, 'test', new DateTime('now'));
 
         $this->repository->save($request);
 
