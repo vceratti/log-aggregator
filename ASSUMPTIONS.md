@@ -34,10 +34,4 @@ would divide the task in subtasks in a real life scenario
 - Each commit to main (from PRs) is a consistent deliverable, mirroring how I would divide
 the task in subtasks in a real life agile scenario
 
-### NOTES: 
 
-- I took this task also as exercise/learning some concepts and libraries: 
- - TDD, DDD, SOLID, [The Twelve-Factor App](https://12factor.net) 
- - High test coverage with #Covers attributes to prevent [unintentional code coverage](https://docs.phpunit.de/en/10.2/risky-tests.html#risky-tests-unintentionally-covered-code)
- - strict code rules checked by [phpmd](phpmd.xml) 
- - strict typing with generics checked by [phpstan](phpstan.neon)
