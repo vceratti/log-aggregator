@@ -28,3 +28,13 @@ services:
         volumes:
             - "./docker/volumes/mysql:/var/lib/mysql"
             - "./docker/mysql:/docker-entrypoint-initdb.d"
+    message-bus:
+        image: rabbitmq:3.12.1-management-alpine
+        ports:
+            - "8081:15672"
+        env_file:
+            - .env
+        environment:
+            - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+            - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASS}
+            - RABBITMQ_DEFAULT_VHOST=${RABBITMQ_VHOST}

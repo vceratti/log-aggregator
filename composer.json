@@ -27,15 +27,16 @@
     "doctrine/orm": "^2.15",
     "guzzlehttp/psr7": "*",
     "league/openapi-psr7-validator": "0.21.*",
+    "symfony/amqp-messenger": "6.3.*",
     "symfony/console": "6.3.*",
     "symfony/flex": "^2",
     "symfony/framework-bundle": "6.3.*",
+    "symfony/messenger": "6.3.*",
     "symfony/psr-http-message-bridge": "^2.2",
     "symfony/runtime": "6.3.*",
     "symfony/yaml": "6.3.*"
   },
   "require-dev": {
-    "ext-mysqli": "*",
     "fakerphp/faker": "^1.23",
     "friendsofphp/php-cs-fixer": "^3.17",
     "jangregor/phpstan-prophecy": "^1.0.0",

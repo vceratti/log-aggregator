@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application\Message;
 
-use LogAggregator\Application\Message\DashboardFilterRequest;
+use LogAggregator\Application\Message\Request\DashboardFilterRequest;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;

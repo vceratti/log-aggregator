@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use LogAggregator\Application\Symfony\Kernel;
 use RuntimeException;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\NullOutput;
@@ -17,15 +16,18 @@ use Throwable;
 
 class TestDatabase
 {
+    use ConsoleTrait;
+
     public const MAX_TRIES = 30;
     public const DB_SLEEP_TIME_MS = 100;
-    private Kernel $kernel;
+
+    protected static Kernel $kernel;
     private EntityManagerInterface $entityManager;
     private OutputInterface $output;
 
     public function __construct(Kernel $kernel, EntityManagerInterface $entityManager, ConsoleOutputInterface $output)
     {
-        $this->kernel = $kernel;
+        self::$kernel = $kernel;
         $this->entityManager = $entityManager;
         $this->output = $output;
         $this->output->setDecorated(true);
@@ -72,15 +74,6 @@ class TestDatabase
         $this->console()->run(new StringInput('doctrine:migrations:migrate --all-or-nothing -n'), new NullOutput());
         $this->output->writeln('<fg=green> Database ready!<fg=green></>' . PHP_EOL);
         $this->sleepWait();
-    }
-
-    public function console(): Application
-    {
-        $console = new Application($this->kernel);
-        $console->setCatchExceptions(true);
-        $console->setAutoExit(false);
-
-        return $console;
     }
 
     private function sleepWait(): void

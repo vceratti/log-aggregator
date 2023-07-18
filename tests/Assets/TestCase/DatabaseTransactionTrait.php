@@ -18,6 +18,7 @@ trait DatabaseTransactionTrait
     protected function getEntityManager(): EntityManagerInterface
     {
         /** @var EntityManagerInterface $entityManager */
+        /** @noinspection PhpUnhandledExceptionInspection */
         $entityManager = self::getContainer()->get('doctrine')->getManager();
 
         return $entityManager;

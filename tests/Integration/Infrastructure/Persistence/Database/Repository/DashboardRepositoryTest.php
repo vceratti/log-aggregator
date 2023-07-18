@@ -9,7 +9,7 @@ use DateTime;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
-use LogAggregator\Application\Message\DashboardFilterRequest;
+use LogAggregator\Application\Message\Request\DashboardFilterRequest;
 use LogAggregator\Domain\RequestLog;
 use LogAggregator\Infrastructure\Persistence\Database\Repository\DashboardRepository;
 use PHPUnit\Framework\Attributes\CoversClass;

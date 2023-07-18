@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Domain;
 
 use DateTime;
-use LogAggregator\Application\Message\RequestLogEntry;
+use LogAggregator\Application\Message\Queue\RequestLogEntry;
 use LogAggregator\Domain\RequestLog;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
