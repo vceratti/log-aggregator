@@ -27,7 +27,7 @@ class RequestMessageFactoryTest extends ApplicationTestCase
     }
 
     /** @throws InvalidMessageException */
-    #[DataProviderExternal(DataProvider\SymfonyRequest::class, 'validGetRequest')]
+    #[DataProviderExternal(DataProvider\SymfonyRequestDataProvider::class, 'validGetRequest')]
     public function testMakeMessage(Request $request): void
     {
         $message = $this->factory->makeMessage(StubMessage::class, $request);

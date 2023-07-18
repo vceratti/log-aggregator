@@ -4,24 +4,26 @@ declare(strict_types=1);
 
 namespace LogAggregator\Application\Service;
 
-use LogAggregator\Application\Factory\RequestLogFactory;
-use LogAggregator\Application\Message\Request\RequestLogRequest;
-use LogAggregator\Infrastructure\Persistence\Database\Repository\RequestLogRepository;
+use LogAggregator\Application\Message\InvalidMessageException;
+use LogAggregator\Application\Message\RequestLogEntry;
+use LogAggregator\Application\Service\Factory\RequestLogFactory;
+use LogAggregator\Infrastructure\Persistence\RequestLogRepositoryInterface;
 
 class StoreRequestLogService
 {
     private RequestLogFactory $entityFactory;
-    private RequestLogRepository $requestLogRepository;
+    private RequestLogRepositoryInterface $requestLogRepository;
 
-    public function __construct(RequestLogRepository $requestLogRepository, RequestLogFactory $entityFactory)
+    public function __construct(RequestLogRepositoryInterface $requestLogRepository, RequestLogFactory $entityFactory)
     {
         $this->requestLogRepository = $requestLogRepository;
         $this->entityFactory = $entityFactory;
     }
 
-    public function insert(RequestLogRequest $requestLogDTO): void
+    /** @throws InvalidMessageException */
+    public function insert(RequestLogEntry $requestLogEntry): void
     {
-        $requestLog = $this->entityFactory->createEntity($requestLogDTO);
+        $requestLog = $this->entityFactory->createEntity($requestLogEntry);
         $this->requestLogRepository->save($requestLog);
     }
 }

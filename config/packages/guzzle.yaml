@@ -1,0 +1,9 @@
+services:
+  GuzzleHttp\Psr7\HttpFactory: ~
+
+  Psr\Http\Message\RequestFactoryInterface: '@GuzzleHttp\Psr7\HttpFactory'
+  Psr\Http\Message\ResponseFactoryInterface: '@GuzzleHttp\Psr7\HttpFactory'
+  Psr\Http\Message\ServerRequestFactoryInterface: '@GuzzleHttp\Psr7\HttpFactory'
+  Psr\Http\Message\StreamFactoryInterface: '@GuzzleHttp\Psr7\HttpFactory'
+  Psr\Http\Message\UploadedFileFactoryInterface: '@GuzzleHttp\Psr7\HttpFactory'
+  Psr\Http\Message\UriFactoryInterface: '@GuzzleHttp\Psr7\HttpFactory'

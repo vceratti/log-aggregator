@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Domain;
+namespace Tests\Unit\Domain\ValueObject;
 
-use LogAggregator\Domain\Dashboard;
+use LogAggregator\Domain\ValueObject\Counter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(Dashboard::class)]
+#[CoversClass(Counter::class)]
 class DashboardTest extends TestCase
 {
     public function testEntity(): void
     {
-        $entity = new Dashboard(1);
+        $entity = new Counter(1);
 
-        $this->assertInstanceOf(Dashboard::class, $entity);
+        $this->assertInstanceOf(Counter::class, $entity);
     }
 
     public function testJsonSerialization(): void
     {
-        $entity = new Dashboard(1);
+        $entity = new Counter(1);
 
         $this->assertSame('{"counter":1}', json_encode($entity));
     }

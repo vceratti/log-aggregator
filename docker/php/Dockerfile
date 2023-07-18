@@ -32,6 +32,4 @@ RUN addgroup -S $DEV_USER -g ${GROUP_ID} && adduser -S -D $DEV_USER -G $DEV_USER
 USER $DEV_USER
 RUN mkdir -p $COMPOSER_HOME
 
-
-
 USER $DEV_USER

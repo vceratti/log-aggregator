@@ -6,7 +6,7 @@ namespace Tests\Functional\Application\Controller;
 
 use League\OpenAPIValidation\PSR7\Exception\ValidationFailed;
 use LogAggregator\Application\Controller\DashboardController;
-use LogAggregator\Domain\Dashboard;
+use LogAggregator\Domain\ValueObject\Counter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Assets\TestCase\RequestTestCase;
 
@@ -18,7 +18,7 @@ class DashboardControllerTest extends RequestTestCase
     {
         $this->client->request('GET', '/count', ['statusCode' => 1]);
 
-        $expectedResult = new Dashboard(0);
+        $expectedResult = new Counter(0);
 
         $this->assertsSuccessfulResponse($expectedResult);
     }

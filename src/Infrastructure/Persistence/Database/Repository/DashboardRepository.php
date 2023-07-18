@@ -11,12 +11,12 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use LogAggregator\Application\Message\Request\DashboardFilterRequest;
-use LogAggregator\Domain\Dashboard;
+use LogAggregator\Application\Message\DashboardFilterRequest;
 use LogAggregator\Domain\RequestLog;
+use LogAggregator\Domain\ValueObject\Counter;
 use LogAggregator\Infrastructure\Persistence\DashboardRepositoryInterface;
 
-/** @extends ServiceEntityRepository<Dashboard> */
+/** @extends ServiceEntityRepository<Counter> */
 class DashboardRepository extends ServiceEntityRepository implements DashboardRepositoryInterface
 {
     public const ALIAS = 'r';
@@ -27,10 +27,10 @@ class DashboardRepository extends ServiceEntityRepository implements DashboardRe
     }
 
     /** @throws NonUniqueResultException|NoResultException */
-    public function countRequestLogs(DashboardFilterRequest $filter): Dashboard
+    public function countRequestLogs(DashboardFilterRequest $filter): Counter
     {
         $alias = self::ALIAS;
-        $entity = Dashboard::class;
+        $entity = Counter::class;
 
         $select = "NEW $entity(count($alias))";
         $query = $this->getEntityManager()->createQueryBuilder()
@@ -39,32 +39,32 @@ class DashboardRepository extends ServiceEntityRepository implements DashboardRe
 
         $query = $this->addWhere($query, $filter);
 
-        /** @var Dashboard $result */
+        /** @var Counter $result */
         $result = $query->getQuery()->getSingleResult();
 
         return $result;
     }
 
-    private function addWhere(QueryBuilder $query, DashboardFilterRequest $dashboardFilterDTO): QueryBuilder
+    private function addWhere(QueryBuilder $query, DashboardFilterRequest $dashboardFilterRequest): QueryBuilder
     {
-        if (count((array)$dashboardFilterDTO->getServiceNames()) > 0) {
+        if (count((array)$dashboardFilterRequest->getServiceNames()) > 0) {
             $query->andWhere($query->expr()->in(self::ALIAS . '.serviceName', ':serviceNames'))
-                ->setParameter(':serviceNames', $dashboardFilterDTO->getServiceNames());
+                ->setParameter(':serviceNames', $dashboardFilterRequest->getServiceNames());
         }
 
-        if($dashboardFilterDTO->getStatusCode()) {
+        if($dashboardFilterRequest->getStatusCode()) {
             $query->andWhere($query->expr()->eq(self::ALIAS . '.statusCode', ':statusCode'))
-                ->setParameter(':statusCode', $dashboardFilterDTO->getStatusCode());
+                ->setParameter(':statusCode', $dashboardFilterRequest->getStatusCode());
         }
 
-        if($dashboardFilterDTO->getStartDate()) {
+        if($dashboardFilterRequest->getStartDate()) {
             $query->andWhere($query->expr()->gte(self::ALIAS . '.dateTime', ':startDate'))
-                ->setParameter(':startDate', $dashboardFilterDTO->getStartDate());
+                ->setParameter(':startDate', $dashboardFilterRequest->getStartDate());
         }
 
-        if($dashboardFilterDTO->getEndDate()) {
+        if($dashboardFilterRequest->getEndDate()) {
             $query->andWhere($query->expr()->lte(self::ALIAS . '.dateTime', ':endDate'))
-                ->setParameter(':endDate', $dashboardFilterDTO->getEndDate());
+                ->setParameter(':endDate', $dashboardFilterRequest->getEndDate());
         }
 
         return $query;
