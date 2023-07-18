@@ -9,8 +9,8 @@
 Tech stack:
 - PHP 8.2
 - Symfony 6.2
-- MySql 8.0 (@TODO: provide an elastic search implementation if there is time)
-- @TODO TBD message bus
+- MySql 8.0
+- RabbitMQ
 - Docker (docker compose for development)
 
 ## Requirements

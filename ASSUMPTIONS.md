@@ -7,26 +7,17 @@ The problem is divided in 2 main scopes:
 - reading log entries from a stream, parsing it and sending it to a service that handles them:
   - the log parser expect a simple format; messages respecting the format are sent to the message
 bus while exceptions are logged and discarded 
-    - @TODO process management (add supervisor)
-    - @TODO task failure / restart
-    - @TODO concurrency / performance (a single command reads continuously the single log from the beginning as a stream 
+    - @TODOs: process management + task failure / restart (add supervisor) 
 , one line at a time while running)
-      - @TODO consider batch parsing / messaging
-    - @TODO log rotation (or any other log operation that is not appending lines to the file)
+    - @TODO log rotation (or any other log operation that is not appending lines to the file are NOT handled 
 
 - the service that receive the log messages, validates / store them and exposes the endpoint for querying 
   - messages are read via message bus 
-    - @TODO decide on the message bus
   - the (DDD) application validates the message, storing them in the database (RDMS / MySql)
     - edge cases / error handling is kept simple: invalid messages are logged and moved to a dead letter storage 
-      - @TODO decide: dead letter queue or DB?       
+      - @TODO decide and implement dead letter (queue or DB) 
   - a REST service is provided for the required query and filters
     - for simplification / time restrictions some real life details may not be covered:
-      - @TODO authentication
-      - @TODO cache
-      - @TODO api versioning or restrictions / rate limit
-      - @TODO security
-      - @TODO performance optimization 
         - @TODO index optimization based on queries and filters combination OR
         - @TODO evaluate ElasticSearch as a better alternative for the dynamic querying (provide 2 versions?)
 
