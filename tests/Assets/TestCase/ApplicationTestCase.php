@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace Tests\Assets\TestCase;
 
 use Exception;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ApplicationTestCase extends WebTestCase
 {
     use DatabaseTransactionTrait;
+    use QueueTrait;
+    use ConsoleTrait;
 
     protected KernelBrowser $client;
 
@@ -19,6 +23,9 @@ class ApplicationTestCase extends WebTestCase
         parent::setUp();
         $this->client = self::createClient();
         $this->beingTransaction();
+        if ($_ENV['APP_DEBUG'] === 'false') {
+            self::getContainer()->set(LoggerInterface::class, new NullLogger());
+        }
     }
 
     /**
@@ -37,6 +44,7 @@ class ApplicationTestCase extends WebTestCase
 
     protected function tearDown(): void
     {
+        $this->resetQueues();
         $this->rollbackTransaction();
         parent::tearDown();
     }

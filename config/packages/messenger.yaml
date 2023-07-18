@@ -1,0 +1,31 @@
+framework:
+    messenger:
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        # failure_transport: failed
+
+        transports:
+            # https://symfony.com/doc/current/messenger.html#transport-configuration
+            # .env
+            # async: '://guest:guest@localhost/%2f/messages'
+
+            log.queue:
+                dsn: 'amqp://%env(RABBITMQ_USER)%:%env(RABBITMQ_PASS)%@%env(RABBITMQ_HOST)%:5672/%2f/'
+                options:
+                    vhost: '%env(RABBITMQ_VHOST)%'
+                    queues:
+                        create_request_log: ~
+            # failed: 'doctrine://default?queue_name=failed'
+#            sync: 'sync://'
+
+        routing:
+            # Route your messages to the transports
+            'LogAggregator\Application\Message\Queue\RequestLogEntry': log.queue
+
+when@test:
+    framework:
+        messenger:
+            transports:
+                log.queue:
+                    options:
+                        queues:
+                            test_create_request_log: ~

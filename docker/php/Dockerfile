@@ -1,12 +1,10 @@
 FROM php:8.2-alpine3.18 as app-base
 
-
-
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
     /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/install-php-extensions && \
-  install-php-extensions pcntl mysqli pdo_mysql sockets bcmath
+  install-php-extensions pcntl mysqli pdo_mysql sockets bcmath amqp
 
 COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 

@@ -6,25 +6,23 @@ namespace Tests\Integration\Application\Stream\Handler;
 
 use Exception;
 use LogAggregator\Application\Message\InvalidMessageException;
-use LogAggregator\Application\Message\RequestLogEntry;
-use LogAggregator\Application\Stream\Handler\RequestLogEntryHandler;
-use LogAggregator\Domain\RequestLog;
+use LogAggregator\Application\Message\Queue\RequestLogEntry;
+use LogAggregator\Application\Stream\Handler\RequestLogStringHandler;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
-use Tests\Assets\Assert\LogRequestAssert;
 use Tests\Assets\DataProvider\RequestLogEntryDataProvider;
 use Tests\Assets\TestCase\ApplicationTestCase;
 
-#[CoversClass(RequestLogEntryHandler::class)]
-class RequestLogEntryHandlerTest extends ApplicationTestCase
+#[CoversClass(RequestLogStringHandler::class)]
+class RequestLogStringHandlerTest extends ApplicationTestCase
 {
-    private RequestLogEntryHandler $handler;
+    private RequestLogStringHandler $handler;
 
     /** @throws Exception */
     protected function setUp(): void
     {
         parent::setUp();
-        $this->handler = $this->getFromContainer(RequestLogEntryHandler::class);
+        $this->handler = $this->getFromContainer(RequestLogStringHandler::class);
     }
 
     /** @throws InvalidMessageException*/
@@ -33,8 +31,8 @@ class RequestLogEntryHandlerTest extends ApplicationTestCase
     {
         $this->handler->handle($string);
 
-        $entities = $this->getEntities(RequestLog::class);
-        $this->assertCount(1, $entities);
-        LogRequestAssert::assertEntityMatchesMessage($requestLogEntry, $entities[0]);
+        $messages = $this->getAllMessages();
+        $this->assertCount(1, $messages);
+        $this->assertSame((array)$requestLogEntry, (array)$messages[0]->getMessage());
     }
 }

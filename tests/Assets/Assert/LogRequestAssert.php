@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Assets\Assert;
 
 use DateTime;
-use LogAggregator\Application\Message\RequestLogEntry;
+use LogAggregator\Application\Message\Queue\RequestLogEntry;
 use LogAggregator\Domain\RequestLog;
 use PHPUnit\Framework\TestCase;
 

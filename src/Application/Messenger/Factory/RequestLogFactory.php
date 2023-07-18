@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LogAggregator\Application\Service\Factory;
+namespace LogAggregator\Application\Messenger\Factory;
 
 use DateTime;
 use LogAggregator\Application\Message\InvalidMessageException;
-use LogAggregator\Application\Message\RequestLogEntry;
+use LogAggregator\Application\Message\Queue\RequestLogEntry;
 use LogAggregator\Domain\RequestLog;
 
 class RequestLogFactory

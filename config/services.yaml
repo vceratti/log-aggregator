@@ -25,3 +25,13 @@ services:
   League\OpenAPIValidation\PSR7\ValidatorBuilder: ~
   Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory: ~
   Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface: '@Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory'
+
+when@test:
+  services:
+    LogAggregator\Application\Symfony\Kernel: ~
+    Symfony\Bundle\FrameworkBundle\Console\Application: ~
+    Symfony\Component\Console\Output\ConsoleOutput: ~
+    Symfony\Component\Console\Output\ConsoleOutputInterface: '@Symfony\Component\Console\Output\ConsoleOutput'
+    Tests\Assets\TestCase\TestDatabase:
+      autowire: true
+      public: true

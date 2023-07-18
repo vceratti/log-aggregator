@@ -10,7 +10,7 @@ use League\OpenAPIValidation\PSR7\Exception\ValidationFailed as ValidationFailed
 use League\OpenAPIValidation\PSR7\OperationAddress;
 use League\OpenAPIValidation\PSR7\ResponseValidator;
 use League\OpenAPIValidation\PSR7\ValidatorBuilder;
-use LogAggregator\Application\Message\Factory\MessageFactory;
+use LogAggregator\Application\Message\MessageValidatorFactory;
 use Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface;
 
 class RequestTestCase extends ApplicationTestCase
@@ -24,7 +24,7 @@ class RequestTestCase extends ApplicationTestCase
         parent::setUp();
         $this->psrResponseFactory = $this->getFromContainer(HttpMessageFactoryInterface::class);
         $this->responseValidator = $this->getFromContainer(ValidatorBuilder::class)
-            ->fromJsonFile(MessageFactory::SCHEMA_JSON)
+            ->fromJsonFile(MessageValidatorFactory::SCHEMA_JSON)
             ->getResponseValidator();
     }
 

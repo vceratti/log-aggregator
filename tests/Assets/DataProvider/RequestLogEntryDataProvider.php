@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Assets\DataProvider;
 
 use LogAggregator\Application\Message\InvalidMessageException;
-use LogAggregator\Application\Message\RequestLogEntry;
+use LogAggregator\Application\Message\Queue\RequestLogEntry;
 
 class RequestLogEntryDataProvider
 {
@@ -58,7 +58,7 @@ class RequestLogEntryDataProvider
         $messages = [];
         foreach (static::validLogEntries() as $name => $data) {
             $string = static::makeLogString($data);
-            $messages[$name] = [new RequestLogEntry(static::makeLogString($data)), $string];
+            $messages[$name] = [new RequestLogEntry($string), $string];
         }
 
         return $messages;
@@ -73,7 +73,7 @@ class RequestLogEntryDataProvider
         $messages = [];
         foreach (static::invalidLogDateFormatEntries() as $name => $data) {
             $string = static::makeLogString($data);
-            $messages[$name] = [new RequestLogEntry(static::makeLogString($data))];
+            $messages[$name] = [new RequestLogEntry($string)];
         }
 
         return $messages;

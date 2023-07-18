@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-namespace LogAggregator\Application\Message;
+namespace LogAggregator\Application\Message\Queue;
 
+use LogAggregator\Application\Message\InvalidMessageException;
+use LogAggregator\Application\Message\MessageInterface;
 use Throwable;
 
 /** @template-implements MessageInterface<RequestLogEntry> */
@@ -14,8 +16,6 @@ class RequestLogEntry implements MessageInterface
     private string $query;
     private int $statusCode;
     private string $dateTime;
-
-    // "USER-SERVICE - - [18/Aug/2018:10:33:59 +0000] "POST /users HTTP/1.1" 201";
 
     /** @throws InvalidMessageException */
     public function __construct(string $logEntry)

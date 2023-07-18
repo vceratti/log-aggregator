@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace LogAggregator\Application\Controller;
 
-use LogAggregator\Application\Controller\Factory\RequestMessageFactory;
-use LogAggregator\Application\Message\DashboardFilterRequest;
 use LogAggregator\Application\Message\InvalidMessageException;
+use LogAggregator\Application\Message\Request\DashboardFilterRequest;
+use LogAggregator\Application\Message\Request\Factory\RequestMessageFactory;
 use LogAggregator\Infrastructure\Persistence\DashboardRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +28,7 @@ class DashboardController extends AbstractController
     #[Route('/count', methods: ['GET'])]
     public function count(Request $request): Response
     {
-        $dashboardFilter = $this->messageFactory->makeMessage(DashboardFilterRequest::class, $request);
+        $dashboardFilter = $this->messageFactory->makeMessageFromRequest(DashboardFilterRequest::class, $request);
         $result = $this->dashboardRepository->countRequestLogs($dashboardFilter);
 
         return $this->json($result);

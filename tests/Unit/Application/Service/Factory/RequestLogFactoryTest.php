@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Unit\Application\Service\Factory;
 
 use LogAggregator\Application\Message\InvalidMessageException;
-use LogAggregator\Application\Message\RequestLogEntry;
-use LogAggregator\Application\Service\Factory\RequestLogFactory;
+use LogAggregator\Application\Message\Queue\RequestLogEntry;
+use LogAggregator\Application\Messenger\Factory\RequestLogFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;

@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LogAggregator\Application\Message;
+namespace LogAggregator\Application\Message\Request;
+
+use LogAggregator\Application\Message\MessageInterface;
 
 /** @template-implements  MessageInterface<DashboardFilterRequest> */
 class DashboardFilterRequest implements MessageInterface
