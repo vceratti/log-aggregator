@@ -25,8 +25,8 @@
     "doctrine/doctrine-bundle": "^2.10",
     "doctrine/doctrine-migrations-bundle": "^3.2",
     "doctrine/orm": "^2.15",
+    "guzzlehttp/psr7": "*",
     "league/openapi-psr7-validator": "0.21.*",
-    "nyholm/psr7": "*",
     "symfony/console": "6.3.*",
     "symfony/flex": "^2",
     "symfony/framework-bundle": "6.3.*",
@@ -86,7 +86,7 @@
     "db:migrate": ["XDEBUG_MODE=off bin/console doctrine:migrations:migrate --all-or-nothing -n"],
     "db:diff": ["@auto-scripts", "XDEBUG_MODE=off bin/console doctrine:migrations:diff --formatted --line-length 100  --check-database-platform --allow-empty-diff -n"],
     "db:reset": ["[ $APP_ENV == 'dev' ] && XDEBUG_MODE=off bin/console doctrine:schema:drop --full-database --force"],
-    "phpstan": "XDEBUG_MODE=off phpstan analyse",
+    "phpstan": "XDEBUG_MODE=off phpstan analyse --memory-limit 2G",
     "phpmd": [
       "XDEBUG_MODE=off phpmd src text phpmd.xml"
     ],

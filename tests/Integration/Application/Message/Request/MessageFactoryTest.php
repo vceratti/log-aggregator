@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Tests\Integration\Application\Message\Request;
 
 use Exception;
+use LogAggregator\Application\Message\Factory\MessageFactory;
 use LogAggregator\Application\Message\InvalidMessageException;
-use LogAggregator\Application\Message\Request\Factory\MessageFactory;
+use LogAggregator\Application\Message\RequestLogEntry;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use Psr\Http\Message\ServerRequestInterface;
-use Tests\Assets\DataProvider\PsrRequest;
+use Tests\Assets\DataProvider\PsrRequestDataProvider;
+use Tests\Assets\DataProvider\RequestLogEntryDataProvider;
 use Tests\Assets\Stub\StubMessage;
 use Tests\Assets\TestCase\ApplicationTestCase;
 
@@ -27,19 +29,33 @@ class MessageFactoryTest extends ApplicationTestCase
     }
 
     /** @throws InvalidMessageException */
-    #[DataProviderExternal(PsrRequest::class, 'validGetRequest')]
+    #[DataProviderExternal(PsrRequestDataProvider::class, 'validGetRequest')]
     public function testFactoryFromValidRequest(ServerRequestInterface $request): void
     {
-        $dto = $this->factory->makeMessageFromRequest(StubMessage::class, $request);
-        $this->assertInstanceOf(StubMessage::class, $dto);
+        $message = $this->factory->makeMessageFromRequest(StubMessage::class, $request);
+        $this->assertInstanceOf(StubMessage::class, $message);
     }
 
     /** @throws InvalidMessageException */
-    #[DataProviderExternal(PsrRequest::class, 'invalidGetRequest')]
+    #[DataProviderExternal(PsrRequestDataProvider::class, 'invalidGetRequest')]
     public function testExceptionOnInvalidRequest(ServerRequestInterface $request): void
     {
         $this->expectException(InvalidMessageException::class);
-        $dto = $this->factory->makeMessageFromRequest(StubMessage::class, $request);
-        $this->assertInstanceOf(StubMessage::class, $dto);
+        $this->factory->makeMessageFromRequest(StubMessage::class, $request);
+    }
+
+    /** @throws InvalidMessageException */
+    #[DataProviderExternal(RequestLogEntryDataProvider::class, 'validMessages')]
+    public function testMakeMessageFromString(RequestLogEntry $requestLogEntry, string $inputString): void
+    {
+        $message = $this->factory->makeMessageFromString(RequestLogEntry::class, $inputString);
+        $this->assertInstanceOf(RequestLogEntry::class, $message);
+    }
+
+    /** @throws InvalidMessageException */
+    public function testExceptionOnInvalidString(): void
+    {
+        $this->expectException(InvalidMessageException::class);
+        $this->factory->makeMessageFromString(RequestLogEntry::class, 'invalid');
     }
 }

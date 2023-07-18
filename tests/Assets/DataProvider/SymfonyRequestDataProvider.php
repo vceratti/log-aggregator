@@ -6,7 +6,7 @@ namespace Tests\Assets\DataProvider;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class SymfonyRequest
+class SymfonyRequestDataProvider
 {
     /** @return array<string, array<int, Request>> */
     public static function validGetRequest(): array

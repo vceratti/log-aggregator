@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace LogAggregator\Application\Controller\Factory;
 
+use LogAggregator\Application\Message\Factory\MessageFactory;
 use LogAggregator\Application\Message\InvalidMessageException;
-use LogAggregator\Application\Message\Request\Factory\MessageFactory;
 use Symfony\Bridge\PsrHttpMessage\HttpMessageFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 

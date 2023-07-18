@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LogAggregator\Domain;
+namespace LogAggregator\Domain\ValueObject;
 
 use JsonSerializable;
 
-class Dashboard implements JsonSerializable
+class Counter implements JsonSerializable
 {
     private int $counter;
 

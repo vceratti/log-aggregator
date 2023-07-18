@@ -30,4 +30,25 @@ class RequestLog extends Entity
         $this->dateTime = $datetime;
         $this->serviceName = $serviceName;
     }
+
+    public function getServiceName(): string
+    {
+        return $this->serviceName;
+    }
+
+    public function getQuery(): string
+    {
+        return $this->query;
+    }
+
+    public function getStatusCode(): int
+    {
+        return $this->statusCode;
+    }
+
+    public function getDateTime(): DateTime
+    {
+        return $this->dateTime;
+    }
+
 }
